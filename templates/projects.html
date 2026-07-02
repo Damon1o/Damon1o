@@ -1,0 +1,57 @@
+{% extends "partials/base.html" %}
+
+{% block title %}Projects — {{ site_config.hero.name }}{% endblock %}
+{% block meta_description %}Portfolio projects by {{ site_config.hero.name }}. Things I've built — from hackathon sprints to long-term tools.{% endblock %}
+{% block og_title %}Projects — {{ site_config.hero.name }}{% endblock %}
+{% block og_description %}Portfolio projects by {{ site_config.hero.name }}. Things I've built — from hackathon sprints to long-term tools.{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/pages/projects.css') }}">
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/pages/projects.js') }}"></script>
+{% endblock %}
+
+{% block content %}
+
+<section class="projects-page">
+    <div class="section-header reveal">
+        <span class="section-overline">Portfolio</span>
+        <h1>My Projects</h1>
+        <p>Things I've built — from hackathon sprints to long-term tools.</p>
+    </div>
+
+    {% if total_count > 0 %}
+    <form class="project-filters reveal" method="GET" action="{{ url_for('projects') }}">
+        <div class="project-search-wrap">
+            <svg class="project-search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+            <input class="project-search" type="text" name="search" value="{{ search_query }}" placeholder="Search projects..." aria-label="Search projects">
+        </div>
+        <div class="filter-tags">
+            <a href="{{ url_for('projects') }}" class="filter-tag {% if not active_tag %}active{% endif %}">All</a>
+            {% for tag in all_tags %}
+            <a href="{{ url_for('projects', tag=tag, search=search_query) }}" class="filter-tag {% if active_tag == tag %}active{% endif %}">{{ tag }}</a>
+            {% endfor %}
+        </div>
+        <p class="filter-count">Showing {{ filtered_projects|length }} of {{ total_count }} projects</p>
+    </form>
+    {% endif %}
+
+    <div class="projects-grid">
+        {% for project in filtered_projects %}
+            {% include "partials/project-card.html" %}
+        {% endfor %}
+    </div>
+
+    {% if filtered_projects|length == 0 %}
+    <div class="projects-empty">
+        <p>No projects match your filter. Try a different search.</p>
+        <a href="{{ url_for('projects') }}" class="filter-reset-btn">Clear Filters</a>
+    </div>
+    {% endif %}
+</section>
+
+{% include "partials/footer.html" %}
+
+{% endblock %}

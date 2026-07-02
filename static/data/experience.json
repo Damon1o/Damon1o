@@ -1,0 +1,88 @@
+{
+    "learning": [
+        {
+            "id": "1",
+            "name": "Hack Club",
+            "role": "Club Leader & Core Member",
+            "period": "2023 – Present",
+            "description": "Running a high-energy hacker community where students ship wild ideas every week. Organizing workshops, running code jams, and building tools that make CS accessible to everyone—no boring lectures allowed.",
+            "skills": [
+                "Community Building",
+                "HC Auth API",
+                "JavaScript",
+                "React",
+                "Event Planning"
+            ],
+            "color": "#C8744D",
+            "link": "https://hackclub.com"
+        },
+        {
+            "id": "2",
+            "name": "Mepham Robotics – V5RC",
+            "role": "Team Lead & Systems Programmer",
+            "period": "2023 – Present",
+            "description": "Engineering competitive robots and the software that drives them. Built dashboards for match scouting, autonomous routines in Python, and a team coordination app—because spreadsheets are for people who don't know how to code.",
+            "skills": [
+                "Python",
+                "React",
+                "MongoDB",
+                "VEX V5",
+                "Team Leadership"
+            ],
+            "color": "#338EDA",
+            "link": null
+        }
+    ],
+    "hackathons": [
+        {
+            "id": "h1",
+            "name": "Hack Club Arcade",
+            "role": "Builder",
+            "date": "Summer 2025",
+            "location": "Online",
+            "description": "30-day coding marathon. Shipped browser games, generative art experiments, and an interactive dev portfolio. Pulled all-nighters, traded stickers by mail, and proved that shipping daily is the ultimate skill unlock.",
+            "project": "Arcade Game Collection",
+            "link": "https://github.com/Damon1o/arcade"
+        },
+        {
+            "id": "h2",
+            "name": "High Seas",
+            "role": "Full-Stack Pirate",
+            "date": "Winter 2024",
+            "location": "Online",
+            "description": "Built a real-time maritime tracker app with live vessel data, interactive maps, and a Flask API backend. Shipped in 48 hours with a team scattered across three time zones and a truly unhinged amount of Red Bull.",
+            "project": "SeaRoute Tracker",
+            "link": "https://github.com/Damon1o/searoute"
+        },
+        {
+            "id": "h3",
+            "name": "HackNY Spring Fling",
+            "role": "Team Lead",
+            "date": "Spring 2025",
+            "location": "New York, NY",
+            "description": "Led a three-person team through 24 sleepless hours to build StudySync—a real-time collaboration platform for students with WebSocket chat, shared whiteboards, and file drops. Won Best Education Hack.",
+            "project": "StudySync",
+            "link": "https://github.com/Damon1o/studysync"
+        },
+        {
+            "id": "h4",
+            "name": "Counterspell NYC",
+            "role": "Game Dev Hacker",
+            "date": "Fall 2024",
+            "location": "Brooklyn, NY",
+            "description": "A 12-hour game jam for high school hackers. Built a pixel-art boss-rush game in vanilla JavaScript with a live leaderboard. Learned that scope creep is real and playtesting at 4 AM is a vibe.",
+            "project": "Pixel Rampage",
+            "link": "https://github.com/Damon1o/pixel-rampage"
+        },
+        {
+            "id": "h5",
+            "name": "Apocalypse Hackathon",
+            "role": "Survival Engineer",
+            "date": "Fall 2024",
+            "location": "Online",
+            "description": "Post-apocalyptic survival sim built with React and Flask. Real-time resource management, procedurally generated maps, and a leaderboard for the last person standing. Came for the theme, stayed for the merge conflicts.",
+            "project": "Wasteland Survival",
+            "link": "https://github.com/Damon1o/wasteland"
+        }
+    ]
+}

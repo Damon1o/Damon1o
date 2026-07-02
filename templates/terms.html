@@ -1,0 +1,22 @@
+{% extends "partials/base.html" %}
+
+{% block title %}Terms — {{ site_config.hero.name }}{% endblock %}
+
+{% block canonical %}<link rel="canonical" href="{{ url_for('terms', _external=True) }}">{% endblock %}
+
+{% block content %}
+<section class="about-page">
+    <div class="section-header reveal">
+        <span class="section-overline">Legal</span>
+        <h1>Terms of Use</h1>
+    </div>
+
+    <div class="about-bio reveal">
+        <p>By accessing this portfolio site, you agree to use it responsibly.</p>
+        <p>All content is provided as-is for informational purposes. No warranties, express or implied, are made regarding the accuracy or completeness of the content.</p>
+        <p>This portfolio and its contents are the intellectual property of the site owner unless otherwise noted.</p>
+    </div>
+</section>
+
+{% include "partials/footer.html" %}
+{% endblock %}

@@ -1,0 +1,14 @@
+__pycache__/
+*.py[cod]
+*.egg-info/
+.env
+venv/
+.venv/
+*.sqlite3
+*.db
+.DS_Store
+Thumbs.db
+
+# Opencode config (contains sensitive settings)
+# Uncomment if you don't want to share agent/skill config:
+.opencode/skills/

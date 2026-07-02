@@ -1,0 +1,124 @@
+{% extends "partials/base.html" %}
+
+{% block title %}Experience — {{ site_config.hero.name }}{% endblock %}
+{% block meta_description %}Experience and hackathons by {{ site_config.hero.name }}. The people, places, and programs that shaped how I think and build.{% endblock %}
+{% block og_title %}Experience — {{ site_config.hero.name }}{% endblock %}
+{% block og_description %}Experience and hackathons by {{ site_config.hero.name }}. The people, places, and programs that shaped how I think and build.{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/pages/experience.css') }}">
+{% endblock %}
+
+{% block content %}
+
+<section class="experience-page">
+    <div class="experience-section">
+        <div class="section-header reveal">
+            <span class="section-overline">My Journey</span>
+            <h2>Where I've Learned</h2>
+            <p>The people, places, and programs that shaped how I think and build.</p>
+        </div>
+
+        <div class="learning-grid">
+            {% for item in experience.learning %}
+            <article class="learning-card reveal" style="--accent: {{ item.color | default('#C8744D') }}">
+                <div class="learning-card-accent"></div>
+                <div class="learning-card-content">
+                    <div class="learning-card-header">
+                        <h3>{{ item.name }}</h3>
+                        {% if item.period %}
+                        <span class="learning-card-period">{{ item.period }}</span>
+                        {% endif %}
+                    </div>
+                    {% if item.role %}
+                    <p class="learning-card-role">{{ item.role }}</p>
+                    {% endif %}
+                    {% if item.description %}
+                    <p class="learning-card-desc">{{ item.description }}</p>
+                    {% endif %}
+                    {% if item.skills %}
+                    <div class="learning-card-skills">
+                        {% for skill in item.skills %}
+                        <span>{{ skill }}</span>
+                        {% endfor %}
+                    </div>
+                    {% endif %}
+                    {% if item.link %}
+                    <a href="{{ item.link }}" target="_blank" rel="noopener" class="learning-card-link">
+                        Visit
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+                            <polyline points="15 3 21 3 21 9"/>
+                            <line x1="10" y1="14" x2="21" y2="3"/>
+                        </svg>
+                    </a>
+                    {% endif %}
+                </div>
+            </article>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="experience-section">
+        <div class="section-header reveal">
+            <span class="section-overline">Competitions</span>
+            <h2>Hackathons I've Attended</h2>
+            <p>The adrenaline, the teamwork, the all-nighters — events where ideas become reality.</p>
+        </div>
+
+        <div class="hackathon-grid">
+            {% for hack in experience.hackathons %}
+            <article class="hackathon-card reveal">
+                <div class="hackathon-card-badge">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="8" r="7"/>
+                        <polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/>
+                    </svg>
+                </div>
+                <div class="hackathon-card-content">
+                    <div class="hackathon-card-meta">
+                        {% if hack.date %}
+                        <span class="hackathon-date">{{ hack.date }}</span>
+                        {% endif %}
+                        {% if hack.location %}
+                        <span class="hackathon-location">{{ hack.location }}</span>
+                        {% endif %}
+                    </div>
+                    <h3>{{ hack.name }}</h3>
+                    {% if hack.role %}
+                    <p class="hackathon-role">{{ hack.role }}</p>
+                    {% endif %}
+                    {% if hack.description %}
+                    <p class="hackathon-desc">{{ hack.description }}</p>
+                    {% endif %}
+                    <div class="hackathon-card-footer">
+                        {% if hack.project %}
+                        <span class="hackathon-project">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="16 18 22 12 16 6"/>
+                                <polyline points="8 6 2 12 8 18"/>
+                            </svg>
+                            {{ hack.project }}
+                        </span>
+                        {% endif %}
+                        {% if hack.link %}
+                        <a href="{{ hack.link }}" target="_blank" rel="noopener" class="hackathon-link">
+                            View Project
+                            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+                                <polyline points="15 3 21 3 21 9"/>
+                                <line x1="10" y1="14" x2="21" y2="3"/>
+                            </svg>
+                        </a>
+                        {% endif %}
+                    </div>
+                </div>
+            </article>
+            {% endfor %}
+        </div>
+    </div>
+</section>
+
+{% include "partials/footer.html" %}
+
+{% endblock %}

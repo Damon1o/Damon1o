@@ -1,0 +1,187 @@
+
+/* ─── 10. PROJECTS PAGE ────────────────────────── */
+.projects-page {
+    position: relative;
+    z-index: 1;
+    padding: var(--space-2xl) clamp(1rem, 6vw, 4rem);
+    padding-top: calc(var(--space-2xl) + 5rem);
+    max-width: var(--content-max);
+    margin: 0 auto;
+}
+
+.projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+    gap: var(--space-md);
+}
+
+.projects-empty {
+    text-align: center;
+    padding: var(--space-2xl) 0;
+    color: var(--gray);
+}
+
+.project-card {
+    border-radius: var(--radius-md);
+    background: var(--white);
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow-sm);
+    overflow: hidden;
+    transition: transform 0.3s var(--ease-out),
+                box-shadow 0.3s var(--ease-out);
+}
+
+.project-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+}
+
+.project-card-image {
+    width: 100%;
+    aspect-ratio: 16/10;
+    overflow: hidden;
+    background: var(--light-gray);
+}
+
+.project-card-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.project-card-body {
+    padding: var(--space-md);
+}
+
+.project-card-category {
+    font-size: var(--text-xs);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--accent);
+    margin-bottom: 0.25em;
+}
+
+.project-card-body h3 {
+    font-family: var(--font-display);
+    font-size: var(--text-md);
+    font-weight: 400;
+    line-height: 1.2;
+    margin-bottom: var(--space-xs);
+    color: var(--dark);
+}
+
+.project-card-body p {
+    font-size: var(--text-sm);
+    color: var(--gray);
+    line-height: 1.6;
+    margin-bottom: var(--space-sm);
+}
+
+.project-card-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+    margin-bottom: var(--space-sm);
+}
+
+.project-card-tags span {
+    font-size: 0.625rem;
+    font-weight: 600;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
+    color: var(--gray);
+    background: var(--light-gray);
+    padding: 2px 8px;
+    border-radius: var(--radius-xl);
+}
+
+.project-card-links {
+    display: flex;
+    gap: var(--space-sm);
+}
+
+.project-card-links a {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35em;
+    font-size: var(--text-xs);
+    font-weight: 500;
+    color: var(--gray);
+    padding: 4px 12px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-xl);
+    transition: color 0.25s var(--ease-out),
+                border-color 0.25s var(--ease-out);
+}
+
+.project-card-links a:hover {
+    color: var(--accent);
+    border-color: var(--accent);
+}
+
+/* ─── Project Filters ─────────────────────────── */
+.project-filters {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-lg);
+    padding: var(--space-md);
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-md);
+}
+
+.project-search {
+    flex: 1;
+    min-width: 200px;
+    padding: 10px 16px;
+    font-size: var(--text-sm);
+    background: var(--light-gray);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-xl);
+    color: var(--dark);
+    outline: none;
+}
+
+.project-search:focus {
+    border-color: var(--accent);
+}
+
+.filter-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.filter-tag {
+    padding: 6px 16px;
+    font-size: var(--text-xs);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    color: var(--gray);
+    background: var(--light-gray);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-xl);
+    cursor: pointer;
+    transition: all 0.25s var(--ease-out);
+}
+
+.filter-tag:hover {
+    color: var(--accent);
+    border-color: var(--accent);
+}
+
+.filter-tag.active {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: var(--white);
+}
+
+.filter-count {
+    font-size: var(--text-xs);
+    color: var(--gray);
+    white-space: nowrap;
+}

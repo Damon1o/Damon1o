@@ -1,0 +1,101 @@
+{% extends "partials/base.html" %}
+
+{% block title %}{{ site_config.hero.name }} — CS Student & Aspiring Engineer{% endblock %}
+{% block meta_description %}{{ site_config.hero.name }} — CS Student & Aspiring Engineer. {{ site_config.hero.subtitle }}{% endblock %}
+{% block og_title %}{{ site_config.hero.name }} — CS Student & Aspiring Engineer{% endblock %}
+{% block og_description %}{{ site_config.hero.name }} — CS Student & Aspiring Engineer. {{ site_config.hero.subtitle }}{% endblock %}
+{% block og_type %}website{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/pages/index.css') }}">
+{% endblock %}
+
+{% block extra_js %}
+<script src="{{ url_for('static', filename='js/pages/index.js') }}"></script>
+{% endblock %}
+
+{% block content %}
+
+<section class="hero">
+    <div class="hero-photos-left" aria-hidden="true">
+        {% for photo in hero_photos.left %}
+        <div class="hero-photo-wrapper" style="top: {{ photo.top }}px; left: {{ photo.left }}px; transform: rotate({{ photo.rotation }}deg); z-index: {{ photo.z }};" data-parallax="{{ photo.parallax }}">
+            <div class="hero-photo-card">
+                <img src="{{ url_for('static', filename=photo.image) }}" alt="" loading="lazy" sizes="(max-width: 1023px) 0px, 370px" />
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <div class="hero-photos-right" aria-hidden="true">
+        {% for photo in hero_photos.right %}
+        <div class="hero-photo-wrapper" style="top: {{ photo.top }}px; right: {{ photo.right }}px; transform: rotate({{ photo.rotation }}deg); z-index: {{ photo.z }};" data-parallax="{{ photo.parallax }}">
+            <div class="hero-photo-card">
+                <img src="{{ url_for('static', filename=photo.image) }}" alt="" loading="lazy" sizes="(max-width: 1023px) 0px, 370px" />
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <div class="hero-content">
+        <div class="hero-status">
+            <span class="hero-status-dot" aria-hidden="true"></span>
+            <span>{% if site_config.hero.status %}{{ site_config.hero.status }}{% else %}Available for projects{% endif %}</span>
+        </div>
+
+        <h1 class="hero-name">{{ site_config.hero.name }}</h1>
+
+        <p class="hero-subtitle">{{ site_config.hero.subtitle }}</p>
+
+        <div class="hero-typing">
+            <span class="hero-typing-text" id="typingText"></span>
+            <span class="typing-cursor" aria-hidden="true">|</span>
+        </div>
+
+        <div class="hero-actions">
+            <a href="{{ url_for('projects') }}" class="hero-cta">
+                View my work
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                    <line x1="5" y1="12" x2="19" y2="12"/>
+                    <polyline points="12 5 19 12 12 19"/>
+                </svg>
+            </a>
+            <a href="{{ url_for('contact') }}" class="hero-cta hero-cta-outline">Get in touch</a>
+        </div>
+    </div>
+
+    <div class="hero-gradient" aria-hidden="true"></div>
+</section>
+
+<section class="marquee-section">
+    <div class="marquee-header">
+        <div class="section-label reveal">
+            <span class="section-overline">Featured Work</span>
+            <h2>Stuff I've Built</h2>
+        </div>
+        <a href="{{ url_for('projects') }}" class="view-all-link reveal">
+            View all
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="5" y1="12" x2="19" y2="12"/>
+                <polyline points="12 5 19 12 12 19"/>
+            </svg>
+        </a>
+    </div>
+
+    <div class="marquee-track-wrapper reveal" data-delay="2">
+        <div class="marquee-track">
+            <div class="marquee-content">
+                {% for project in projects %}
+                    {% include "partials/project-marquee-card.html" %}
+                {% endfor %}
+                {% for project in projects %}
+                    {% include "partials/project-marquee-card.html" %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</section>
+
+{% include "partials/footer.html" %}
+
+{% endblock %}

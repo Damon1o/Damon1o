@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login — Damon Lin</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/core.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/admin/admin.css') }}">
+</head>
+<body class="admin-body">
+
+    <main class="admin-login-wrapper">
+        <div class="admin-login-card">
+            <div class="admin-login-header">
+                <h1>Admin Panel</h1>
+                <p>Enter your password to continue.</p>
+            </div>
+
+            {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+            {% for category, message in messages %}
+            <div class="admin-flash admin-flash-{{ category }}">{{ message }}</div>
+            {% endfor %}
+            {% endif %}
+            {% endwith %}
+
+            <form method="POST" class="admin-login-form">
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" required autofocus placeholder="Enter password">
+                </div>
+                <button type="submit" class="btn-admin btn-admin-primary">Sign In</button>
+            </form>
+
+            <a href="{{ url_for('index') }}" class="admin-back-link">&larr; Back to site</a>
+        </div>
+    </main>
+
+</body>
+</html>

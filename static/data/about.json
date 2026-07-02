@@ -1,0 +1,18 @@
+{
+    "bio": [
+        "I'm Damon Lin, a CS student who believes the best way to learn is to build. I run Hack Club at my school, lead a competitive robotics team, and spend my weekends at hackathons turning half-baked ideas into working software before the deadline hits.",
+        "What got me into code wasn't a class \u2014 it was the feeling of shipping something real. A dashboard that scouts robotics matches. A web app that helps my team coordinate. A game built in 12 hours with friends. Every project taught me more than any tutorial ever could.",
+        "When I'm not coding, I'm probably organizing a workshop, mentoring newer hackers, or arguing about tabs vs. spaces."
+    ],
+    "skills": {
+        "Languages": ["Python", "JavaScript", "TypeScript", "HTML/CSS"],
+        "Frameworks & Libraries": ["Flask", "React", "Next.js", "Tailwind CSS"],
+        "Tools & Platforms": ["Git", "MongoDB", "SQLite", "VEX V5", "Vercel"],
+        "Soft Skills": ["Team Leadership", "Community Building", "Event Planning", "Public Speaking"]
+    },
+    "values": [
+        {"title": "Build in Public", "description": "Shipping beats perfection. Every project, even the broken ones, teaches something worth sharing.", "color": "#C8744D"},
+        {"title": "Community First", "description": "The best code in the world is useless if nobody uses it. Building communities around technology is the real multiplier.", "color": "#338EDA"},
+        {"title": "Learn by Doing", "description": "Tutorials teach syntax. Projects teach engineering. The only way to grow is to build things that scare you a little.", "color": "#22C55E"}
+    ]
+}

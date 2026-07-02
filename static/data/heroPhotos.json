@@ -1,0 +1,27 @@
+{
+    "hero-photos-left": [
+        { "image": "images/hero/hero_left_1.png", "top": 65,  "left": -140, "rotation": -8,  "z": 8,  "parallax": 0.15 },
+        { "image": "images/hero/hero_left_2.png", "top": 225, "left": -185, "rotation": 16,  "z": 7,  "parallax": 0.12 },
+        { "image": "images/hero/hero_left_3.png", "top": 365, "left": -170, "rotation": -14, "z": 7,  "parallax": 0.09 },
+        { "image": "images/hero/hero_left_4.png", "top": 495, "left": -140, "rotation": 11,  "z": 8,  "parallax": 0.07 },
+        { "image": "images/hero/hero_left_5.png", "top": 610, "left": -95,  "rotation": -20, "z": 9,  "parallax": 0.05 },
+        { "image": "images/hero/hero_left_6.png", "top": 695, "left": -100, "rotation": 22,  "z": 8,  "parallax": 0.04 },
+        { "image": "images/hero/hero_left_7.png", "top": 725, "left": -5,   "rotation": -9,  "z": 10, "parallax": 0.03 }
+    ],
+    "hero-photos-right": [
+        { "image": "images/hero/hero_right_1.png", "top": 70,  "right": -150, "rotation": 10,  "z": 8,  "parallax": 0.15 },
+        { "image": "images/hero/hero_right_2.png", "top": 230, "right": -180, "rotation": -16, "z": 7,  "parallax": 0.12 },
+        { "image": "images/hero/hero_right_3.png", "top": 370, "right": -160, "rotation": 13,  "z": 7,  "parallax": 0.09 },
+        { "image": "images/hero/hero_right_4.png", "top": 500, "right": -135, "rotation": -11, "z": 8,  "parallax": 0.07 },
+        { "image": "images/hero/hero_right_5.png", "top": 615, "right": -110, "rotation": 20,  "z": 8,  "parallax": 0.05 },
+        { "image": "images/hero/hero_right_6.png", "top": 715, "right": -25,  "rotation": -10, "z": 10, "parallax": 0.03 }
+    ],
+    "hero-stickers": [
+        { "image": "", "left": "calc(75 / 1920 * 100vw)", "top": "calc(266 / 1080 * 100vh)", "rotation": 18 },
+        { "image": "", "left": "calc(215 / 1920 * 100vw)", "top": "calc(663 / 1080 * 100vh)", "rotation": -24 },
+        { "image": "", "left": "calc(300 / 1920 * 100vw)", "top": "calc(768 / 1080 * 100vh)", "rotation": 13 },
+        { "image": "", "right": "calc(100 / 1920 * 100vw)", "top": "calc(285 / 1080 * 100vh)", "rotation": -16 },
+        { "image": "", "right": "calc(155 / 1920 * 100vw)", "top": "calc(528 / 1080 * 100vh)", "rotation": 22 },
+        { "image": "", "right": "calc(280 / 1920 * 100vw)", "top": "calc(767 / 1080 * 100vh)", "rotation": -9 }
+    ]
+}

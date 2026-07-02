@@ -1,0 +1,22 @@
+{% extends "partials/base.html" %}
+
+{% block title %}Privacy — {{ site_config.hero.name }}{% endblock %}
+
+{% block canonical %}<link rel="canonical" href="{{ url_for('privacy', _external=True) }}">{% endblock %}
+
+{% block content %}
+<section class="about-page">
+    <div class="section-header reveal">
+        <span class="section-overline">Legal</span>
+        <h1>Privacy Policy</h1>
+    </div>
+
+    <div class="about-bio reveal">
+        <p>This is a personal portfolio site. No personal data is collected or shared.</p>
+        <p>Contact form messages are stored locally and never shared with third parties.</p>
+        <p>This site does not use tracking cookies or sell any information.</p>
+    </div>
+</section>
+
+{% include "partials/footer.html" %}
+{% endblock %}

@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard — Damon Lin</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/core.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/admin/admin.css') }}">
+</head>
+<body class="admin-body">
+
+    <header class="admin-navbar">
+        <div class="admin-nav-inner">
+            <span class="admin-nav-brand">Admin Panel</span>
+            <nav class="admin-nav-links">
+                <a href="{{ url_for('index') }}" target="_blank">View Site</a>
+                <a href="{{ url_for('admin_logout') }}" class="admin-logout-btn">Logout</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="admin-dashboard">
+
+        {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+        <div class="admin-flashes">
+            {% for category, message in messages %}
+            <div class="admin-flash admin-flash-{{ category }}">{{ message }}</div>
+            {% endfor %}
+        </div>
+        {% endif %}
+        {% endwith %}
+
+        <div class="admin-tabs">
+            <button class="admin-tab active" data-tab="tab-projects">Projects</button>
+            <button class="admin-tab" data-tab="tab-learning">Learning Experience</button>
+            <button class="admin-tab" data-tab="tab-hackathons">Hackathons</button>
+            <button class="admin-tab" data-tab="tab-messages">Messages {% if contact_messages|selectattr('read', 'equalto', false)|list|length > 0 %}<span class="admin-badge">{{ contact_messages|selectattr('read', 'equalto', false)|list|length }}</span>{% endif %}</button>
+            <button class="admin-tab" data-tab="tab-hero">Hero</button>
+            <button class="admin-tab" data-tab="tab-settings">Settings</button>
+        </div>
+
+        <div class="admin-tab-content active" id="tab-projects">
+            <div class="admin-section-header">
+                <h2>Featured Projects</h2>
+                <button class="btn-admin btn-admin-sm" onclick="document.getElementById('add-project-form').classList.toggle('visible')">+ Add Project</button>
+            </div>
+
+            <form id="add-project-form" class="admin-collapse-form" action="{{ url_for('admin_add_project') }}" method="POST" enctype="multipart/form-data">
+                <h3>New Project</h3>
+                <div class="admin-form-grid">
+                    <div class="form-group">
+                        <label>Title</label>
+                        <input type="text" name="title" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Category</label>
+                        <input type="text" name="category" required>
+                    </div>
+                    <div class="form-group full">
+                        <label>Cover Image Path</label>
+                        <div class="admin-image-field">
+                            <input type="text" name="cover-image" value="images/blank.png">
+                            <input type="file" name="cover-image-file" accept="image/*" class="admin-file-input" onchange="previewImage(this)">
+                        </div>
+                        <div class="admin-image-preview" style="display:none">
+                            <img src="" alt="Preview"><button type="button" class="admin-preview-remove" onclick="clearPreview(this)">&times;</button>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label>Tags (comma separated)</label>
+                        <input type="text" name="tags" placeholder="Python, JavaScript, Flask">
+                    </div>
+                    <div class="form-group">
+                        <label>GitHub URL</label>
+                        <input type="text" name="github">
+                    </div>
+                    <div class="form-group">
+                        <label>Website URL</label>
+                        <input type="text" name="website">
+                    </div>
+                    <div class="form-group full">
+                        <label>Description</label>
+                        <textarea name="description" rows="3"></textarea>
+                    </div>
+                </div>
+                <button type="submit" class="btn-admin btn-admin-primary">Save Project</button>
+            </form>
+
+            <div class="admin-list">
+                {% for project in projects %}
+                <div class="admin-list-item">
+                    <div class="admin-list-info">
+                        <strong>{{ project.title }}</strong>
+                        <span class="admin-list-meta">{{ project.category }} &middot; {{ project.tags|join(', ') }}</span>
+                    </div>
+                    <div class="admin-list-actions">
+                        <button class="btn-admin btn-admin-sm btn-admin-outline" onclick="document.getElementById('edit-project-{{ project.id }}').classList.toggle('visible')">Edit</button>
+                        <form action="{{ url_for('admin_delete_project', project_id=project.id) }}" method="POST" style="display:inline" onsubmit="return confirm('Delete {{ project.title }}?')">
+                            <button type="submit" class="btn-admin btn-admin-sm btn-admin-danger">Delete</button>
+                        </form>
+                    </div>
+                </div>
+
+                <form id="edit-project-{{ project.id }}" class="admin-collapse-form" action="{{ url_for('admin_edit_project', project_id=project.id) }}" method="POST" enctype="multipart/form-data">
+                    <h3>Edit: {{ project.title }}</h3>
+                    <div class="admin-form-grid">
+                        <div class="form-group">
+                            <label>Title</label>
+                            <input type="text" name="title" value="{{ project.title }}" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Category</label>
+                            <input type="text" name="category" value="{{ project.category }}" required>
+                        </div>
+                        <div class="form-group full">
+                            <label>Cover Image Path</label>
+                            <div class="admin-image-field">
+                                <input type="text" name="cover-image" value="{{ project['cover-image'] }}">
+                                <input type="file" name="cover-image-file" accept="image/*" class="admin-file-input" onchange="previewImage(this)">
+                            </div>
+                            <div class="admin-image-preview" style="display:none">
+                                <img src="" alt="Preview"><button type="button" class="admin-preview-remove" onclick="clearPreview(this)">&times;</button>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Tags</label>
+                            <input type="text" name="tags" value="{{ project.tags|join(', ') }}">
+                        </div>
+                        <div class="form-group">
+                            <label>GitHub URL</label>
+                            <input type="text" name="github" value="{{ project.links.github }}">
+                        </div>
+                        <div class="form-group">
+                            <label>Website URL</label>
+                            <input type="text" name="website" value="{{ project.links.website }}">
+                        </div>
+                        <div class="form-group full">
+                            <label>Description</label>
+                            <textarea name="description" rows="3">{{ project.description }}</textarea>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn-admin btn-admin-primary">Update Project</button>
+                </form>
+                {% endfor %}
+
+                {% if not projects %}
+                <p class="admin-empty">No projects yet. Add one above.</p>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="admin-tab-content" id="tab-learning">
+            <div class="admin-section-header">
+                <h2>Learning Experiences</h2>
+                <button class="btn-admin btn-admin-sm" onclick="document.getElementById('add-learning-form').classList.toggle('visible')">+ Add Entry</button>
+            </div>
+
+            <form id="add-learning-form" class="admin-collapse-form" action="{{ url_for('admin_add_experience', item_type='learning') }}" method="POST">
+                <h3>New Learning Entry</h3>
+                <div class="admin-form-grid">
+                    <div class="form-group">
+                        <label>Name</label>
+                        <input type="text" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Role</label>
+                        <input type="text" name="role" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Period</label>
+                        <input type="text" name="period" placeholder="2023 — Present">
+                    </div>
+                    <div class="form-group">
+                        <label>Color</label>
+                        <input type="color" name="color" value="#CC785C">
+                    </div>
+                    <div class="form-group">
+                        <label>Link (optional)</label>
+                        <input type="text" name="link">
+                    </div>
+                    <div class="form-group">
+                        <label>Skills (comma separated)</label>
+                        <input type="text" name="skills" placeholder="Python, JavaScript">
+                    </div>
+                    <div class="form-group full">
+                        <label>Description</label>
+                        <textarea name="description" rows="3"></textarea>
+                    </div>
+                </div>
+                <button type="submit" class="btn-admin btn-admin-primary">Save Entry</button>
+            </form>
+
+            <div class="admin-list">
+                {% for item in experience.learning %}
+                <div class="admin-list-item">
+                    <div class="admin-list-info">
+                        <strong>{{ item.name }}</strong>
+                        <span class="admin-list-meta">{{ item.role }} &middot; {{ item.period }}</span>
+                    </div>
+                    <div class="admin-list-actions">
+                        <button class="btn-admin btn-admin-sm btn-admin-outline" onclick="document.getElementById('edit-learning-{{ item.id }}').classList.toggle('visible')">Edit</button>
+                        <form action="{{ url_for('admin_delete_experience', item_type='learning', item_id=item.id) }}" method="POST" style="display:inline" onsubmit="return confirm('Delete {{ item.name }}?')">
+                            <button type="submit" class="btn-admin btn-admin-sm btn-admin-danger">Delete</button>
+                        </form>
+                    </div>
+                </div>
+
+                <form id="edit-learning-{{ item.id }}" class="admin-collapse-form" action="{{ url_for('admin_edit_experience', item_type='learning', item_id=item.id) }}" method="POST">
+                    <h3>Edit: {{ item.name }}</h3>
+                    <div class="admin-form-grid">
+                        <div class="form-group">
+                            <label>Name</label>
+                            <input type="text" name="name" value="{{ item.name }}" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Role</label>
+                            <input type="text" name="role" value="{{ item.role }}" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Period</label>
+                            <input type="text" name="period" value="{{ item.period }}">
+                        </div>
+                        <div class="form-group">
+                            <label>Color</label>
+                            <input type="color" name="color" value="{{ item.color }}">
+                        </div>
+                        <div class="form-group">
+                            <label>Link</label>
+                            <input type="text" name="link" value="{{ item.link or '' }}">
+                        </div>
+                        <div class="form-group">
+                            <label>Skills</label>
+                            <input type="text" name="skills" value="{{ item.skills|join(', ') }}">
+                        </div>
+                        <div class="form-group full">
+                            <label>Description</label>
+                            <textarea name="description" rows="3">{{ item.description }}</textarea>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn-admin btn-admin-primary">Update Entry</button>
+                </form>
+                {% endfor %}
+
+                {% if not experience.learning %}
+                <p class="admin-empty">No learning experiences yet.</p>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="admin-tab-content" id="tab-hackathons">
+            <div class="admin-section-header">
+                <h2>Hackathons</h2>
+                <button class="btn-admin btn-admin-sm" onclick="document.getElementById('add-hackathon-form').classList.toggle('visible')">+ Add Hackathon</button>
+            </div>
+
+            <form id="add-hackathon-form" class="admin-collapse-form" action="{{ url_for('admin_add_experience', item_type='hackathons') }}" method="POST">
+                <h3>New Hackathon</h3>
+                <div class="admin-form-grid">
+                    <div class="form-group">
+                        <label>Name</label>
+                        <input type="text" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Role</label>
+                        <input type="text" name="role" value="Participant">
+                    </div>
+                    <div class="form-group">
+                        <label>Date</label>
+                        <input type="text" name="date" placeholder="Summer 2024">
+                    </div>
+                    <div class="form-group">
+                        <label>Location</label>
+                        <input type="text" name="location" placeholder="Online">
+                    </div>
+                    <div class="form-group">
+                        <label>Project Name</label>
+                        <input type="text" name="project">
+                    </div>
+                    <div class="form-group">
+                        <label>Link (optional)</label>
+                        <input type="text" name="link">
+                    </div>
+                    <div class="form-group full">
+                        <label>Description</label>
+                        <textarea name="description" rows="3"></textarea>
+                    </div>
+                </div>
+                <button type="submit" class="btn-admin btn-admin-primary">Save Hackathon</button>
+            </form>
+
+            <div class="admin-list">
+                {% for item in experience.hackathons %}
+                <div class="admin-list-item">
+                    <div class="admin-list-info">
+                        <strong>{{ item.name }}</strong>
+                        <span class="admin-list-meta">{{ item.date }} &middot; {{ item.location }} &middot; {{ item.role }}</span>
+                    </div>
+                    <div class="admin-list-actions">
+                        <button class="btn-admin btn-admin-sm btn-admin-outline" onclick="document.getElementById('edit-hackathon-{{ item.id }}').classList.toggle('visible')">Edit</button>
+                        <form action="{{ url_for('admin_delete_experience', item_type='hackathons', item_id=item.id) }}" method="POST" style="display:inline" onsubmit="return confirm('Delete {{ item.name }}?')">
+                            <button type="submit" class="btn-admin btn-admin-sm btn-admin-danger">Delete</button>
+                        </form>
+                    </div>
+                </div>
+
+                <form id="edit-hackathon-{{ item.id }}" class="admin-collapse-form" action="{{ url_for('admin_edit_experience', item_type='hackathons', item_id=item.id) }}" method="POST">
+                    <h3>Edit: {{ item.name }}</h3>
+                    <div class="admin-form-grid">
+                        <div class="form-group">
+                            <label>Name</label>
+                            <input type="text" name="name" value="{{ item.name }}" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Role</label>
+                            <input type="text" name="role" value="{{ item.role }}">
+                        </div>
+                        <div class="form-group">
+                            <label>Date</label>
+                            <input type="text" name="date" value="{{ item.date }}">
+                        </div>
+                        <div class="form-group">
+                            <label>Location</label>
+                            <input type="text" name="location" value="{{ item.location }}">
+                        </div>
+                        <div class="form-group">
+                            <label>Project Name</label>
+                            <input type="text" name="project" value="{{ item.project }}">
+                        </div>
+                        <div class="form-group">
+                            <label>Link</label>
+                            <input type="text" name="link" value="{{ item.link or '' }}">
+                        </div>
+                        <div class="form-group full">
+                            <label>Description</label>
+                            <textarea name="description" rows="3">{{ item.description }}</textarea>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn-admin btn-admin-primary">Update Hackathon</button>
+                </form>
+                {% endfor %}
+
+                {% if not experience.hackathons %}
+                <p class="admin-empty">No hackathons yet.</p>
+                {% endif %}
+            </div>
+        </div>
+
+        <div class="admin-tab-content" id="tab-messages">
+            <div class="admin-section-header">
+                <h2>Contact Messages</h2>
+                {% if total_pages > 1 %}
+                <span class="admin-page-indicator">Page {{ current_page }} of {{ total_pages }}</span>
+                {% endif %}
+            </div>
+
+            <div class="admin-list">
+                {% for msg in contact_messages %}
+                <div class="admin-list-item {% if not msg.read %}unread{% endif %}">
+                    <div class="admin-list-info">
+                        <strong>{{ msg.name }} <span class="admin-msg-email">{{ msg.email }}</span></strong>
+                        <span class="admin-list-meta">{{ msg.subject or 'No subject' }} &middot; {{ msg.date }}</span>
+                    </div>
+                    <div class="admin-list-actions">
+                        <button class="btn-admin btn-admin-sm btn-admin-outline" onclick="toggleMsg(this, '{{ msg.id }}')">View</button>
+                        <form action="{{ url_for('admin_delete_message', message_id=msg.id) }}" method="POST" style="display:inline" onsubmit="return confirm('Delete this message?')">
+                            <button type="submit" class="btn-admin btn-admin-sm btn-admin-danger">Delete</button>
+                        </form>
+                    </div>
+                </div>
+                <div class="admin-msg-body" id="msg-{{ msg.id }}" style="display:none">
+                    <p>{{ msg.message }}</p>
+                    <div class="admin-msg-footer">
+                        <span>From: {{ msg.email }}</span>
+                        <span>{{ msg.date }}</span>
+                    </div>
+                </div>
+                {% endfor %}
+
+                {% if not contact_messages %}
+                <p class="admin-empty">No messages received yet.</p>
+                {% endif %}
+            </div>
+
+            {% if total_pages > 1 %}
+            <div class="admin-pagination">
+                {% if has_prev %}
+                <a href="{{ url_for('admin_dashboard', page=current_page - 1) }}#tab-messages" class="btn-admin btn-admin-sm btn-admin-outline admin-page-link">&larr; Previous</a>
+                {% else %}
+                <span class="btn-admin btn-admin-sm btn-admin-outline admin-page-link disabled">&larr; Previous</span>
+                {% endif %}
+
+                {% for p in range(1, total_pages + 1) %}
+                    {% if p == current_page %}
+                    <span class="admin-page-num active">{{ p }}</span>
+                    {% else %}
+                    <a href="{{ url_for('admin_dashboard', page=p) }}#tab-messages" class="admin-page-num">{{ p }}</a>
+                    {% endif %}
+                {% endfor %}
+
+                {% if has_next %}
+                <a href="{{ url_for('admin_dashboard', page=current_page + 1) }}#tab-messages" class="btn-admin btn-admin-sm btn-admin-outline admin-page-link">Next &rarr;</a>
+                {% else %}
+                <span class="btn-admin btn-admin-sm btn-admin-outline admin-page-link disabled">Next &rarr;</span>
+                {% endif %}
+            </div>
+            {% endif %}
+        </div>
+
+        <div class="admin-tab-content" id="tab-hero">
+            <div class="admin-section-header">
+                <h2>Hero Photo Cards</h2>
+                <p class="admin-hint">Edit image paths and positions for hero photo cards. Upload images via the <a href="#tab-projects">Projects</a> tab or place them in <code>static/images/hero/</code>.</p>
+            </div>
+
+            <form class="admin-settings-form" action="{{ url_for('admin_hero_photos') }}" method="POST">
+                <fieldset>
+                    <legend>Left Column ({{ hero_photos.left|length }} photos)</legend>
+                    {% for photo in hero_photos.left %}
+                    <div class="admin-hero-row">
+                        <span class="admin-hero-index">#{{ loop.index }}</span>
+                        <div class="admin-form-grid admin-form-grid-2">
+                            <div class="form-group full">
+                                <label>Image Path</label>
+                                <input type="text" name="hero-photos-left_{{ loop.index0 }}_image" value="{{ photo.image }}" placeholder="images/hero/hero_left_1.png">
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </fieldset>
+
+                <fieldset>
+                    <legend>Right Column ({{ hero_photos.right|length }} photos)</legend>
+                    {% for photo in hero_photos.right %}
+                    <div class="admin-hero-row">
+                        <span class="admin-hero-index">#{{ loop.index }}</span>
+                        <div class="admin-form-grid admin-form-grid-2">
+                            <div class="form-group full">
+                                <label>Image Path</label>
+                                <input type="text" name="hero-photos-right_{{ loop.index0 }}_image" value="{{ photo.image }}" placeholder="images/hero/hero_right_1.png">
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </fieldset>
+
+                <button type="submit" class="btn-admin btn-admin-primary">Save Hero Photos</button>
+            </form>
+        </div>
+
+        <div class="admin-tab-content" id="tab-settings">
+            <div class="admin-section-header">
+                <h2>Site Settings</h2>
+            </div>
+
+            <form class="admin-settings-form" action="{{ url_for('admin_site_config') }}" method="POST">
+                <fieldset>
+                    <legend>Hero Section</legend>
+                    <div class="admin-form-grid">
+                        <div class="form-group full">
+                            <label>Status Text</label>
+                            <input type="text" name="hero_status" value="{{ site_config.hero.status }}">
+                        </div>
+                        <div class="form-group">
+                            <label>Name</label>
+                            <input type="text" name="hero_name" value="{{ site_config.hero.name }}">
+                        </div>
+                        <div class="form-group">
+                            <label>Subtitle</label>
+                            <input type="text" name="hero_subtitle" value="{{ site_config.hero.subtitle }}">
+                        </div>
+                    </div>
+                </fieldset>
+
+                <fieldset>
+                    <legend>Contact & Social</legend>
+                    <div class="admin-form-grid">
+                        <div class="form-group full">
+                            <label>Email</label>
+                            <input type="email" name="contact_email" value="{{ site_config.contact.email }}">
+                        </div>
+                        <div class="form-group">
+                            <label>GitHub URL</label>
+                            <input type="text" name="contact_github" value="{{ site_config.contact.github }}">
+                        </div>
+                        <div class="form-group">
+                            <label>LinkedIn URL</label>
+                            <input type="text" name="contact_linkedin" value="{{ site_config.contact.linkedin }}">
+                        </div>
+                    </div>
+                </fieldset>
+
+                <fieldset>
+                    <legend>Change Admin Password</legend>
+                    <div class="admin-form-grid">
+                        <div class="form-group">
+                            <label>New Password</label>
+                            <input type="password" name="new_password" placeholder="Leave blank to keep current">
+                        </div>
+                    </div>
+                </fieldset>
+
+                <button type="submit" class="btn-admin btn-admin-primary">Save Settings</button>
+            </form>
+        </div>
+
+    </main>
+
+    <script>
+        function previewImage(input) {
+            var container = input.closest('.form-group');
+            var preview = container.querySelector('.admin-image-preview');
+            var img = preview.querySelector('img');
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+                reader.onload = function(e) {
+                    img.src = e.target.result;
+                    preview.style.display = 'block';
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        function clearPreview(btn) {
+            var container = btn.closest('.form-group');
+            var preview = container.querySelector('.admin-image-preview');
+            var fileInput = container.querySelector('input[type="file"]');
+            preview.querySelector('img').src = '';
+            preview.style.display = 'none';
+            fileInput.value = '';
+        }
+    </script>
+    <script src="{{ url_for('static', filename='js/core.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/admin/admin.js') }}"></script>
+</body>
+</html>

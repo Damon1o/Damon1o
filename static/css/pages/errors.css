@@ -1,0 +1,18 @@
+﻿/* ─── 19. ERROR PAGES ──────────────────────────── */
+.error-page {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 70vh;
+    padding: var(--space-2xl) clamp(1rem, 6vw, 4rem);
+    padding-top: calc(var(--space-2xl) + 5rem);
+    text-align: center;
+}
+
+.error-actions {
+    margin-top: var(--space-lg);
+}
+

@@ -1,0 +1,52 @@
+{
+    "featured-projects": [
+        {
+            "id": "1",
+            "title": "V5RC Robotics Web App",
+            "category": "Web Application",
+            "cover-image": "images/v5rc-robotics-web-app.png",
+            "tags": [
+                "Python",
+                "Javascript",
+                "MongoDB"
+            ],
+            "description": "A full-stack web application for the V5RC Robotics Competition, allowing teams to manage their members, events, and competitions.",
+            "links": {
+                "github": "https://github.com/Damon1o/mepham_robotics",
+                "website": "https://mephamrobotics.vercel.app"
+            }
+        },
+        {
+            "id": "2",
+            "title": "Personal Portfolio",
+            "category": "Website",
+            "cover-image": "images/blank.png",
+            "tags": [
+                "Flask",
+                "CSS",
+                "Javascript"
+            ],
+            "description": "A warm, organic personal portfolio showcasing my work and experience as an aspiring software engineer.",
+            "links": {
+                "github": "https://github.com/Damon1o/portfolio",
+                "website": "#"
+            }
+        },
+        {
+            "id": "3",
+            "title": "Hack CLub Leader Web App",
+            "category": "Web Application",
+            "cover-image": "images/hack-club-leader-web-app.png",
+            "tags": [
+                "Python",
+                "Javascript",
+                "HC Auth"
+            ],
+            "description": "A command-line task manager with local SQLite storage, priority sorting, and deadline tracking.",
+            "links": {
+                "github": "https://github.com/Damon1o/task-manager",
+                "website": "https://hackclub-leaders.vercel.app/"
+            }
+        }
+    ]
+}

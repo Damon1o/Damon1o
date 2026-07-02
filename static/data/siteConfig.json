@@ -1,0 +1,28 @@
+{
+    "hero": {
+        "status": "Available for projects",
+        "name": "Damon Lin",
+        "subtitle": "CS Student \u2022 Aspiring Engineer"
+    },
+    "contact": {
+        "email": "damonlin.contact@gmail.com",
+        "github": "https://github.com/Damon1o",
+        "linkedin": "https://www.linkedin.com/in/damon01/"
+    },
+    "email": {
+        "smtp_server": "smtp.gmail.com",
+        "smtp_port": 587,
+        "enabled": false,
+        "notification_email": "damonlin.contact@gmail.com",
+        "email_sender": "damonlin.contact@gmail.com"
+    },
+    "analytics": {
+        "google_analytics_id": "",
+        "provider": "none"
+    },
+    "resume": {
+        "enabled": false,
+        "url": "/static/files/resume.pdf"
+    },
+    "admin_password": "admin123"
+}

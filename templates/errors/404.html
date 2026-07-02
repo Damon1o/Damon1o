@@ -1,0 +1,26 @@
+{% extends "partials/base.html" %}
+
+{% block title %}404 — Page not found | {{ site_config.hero.name }}{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/pages/errors.css') }}">
+{% endblock %}
+
+{% block content %}
+<section class="error-page">
+    <div class="section-header reveal">
+        <span class="section-overline">404</span>
+        <h1>Page not found</h1>
+        <p>The page you're looking for doesn't exist or has been moved. Let's get you back on track.</p>
+    </div>
+    <div class="error-actions reveal">
+        <a href="{{ url_for('index') }}" class="hero-cta">
+            Back to home
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="5" y1="12" x2="19" y2="12"/>
+                <polyline points="12 5 19 12 12 19"/>
+            </svg>
+        </a>
+    </div>
+</section>
+{% endblock %}

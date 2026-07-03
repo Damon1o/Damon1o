@@ -1,5 +1,5 @@
-/* ─── 1. FONT IMPORTS ─────────────────────────── */
-@import url('https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&family=Outfit:wght@100..900&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap');
+/* Fonts are loaded via <link> in base.html (preconnect + parallel fetch)
+   instead of a render-blocking @import here. */
 /* ─── 2. CSS VARIABLES ────────────────────────── */
 :root {
     --accent: #C8744D;
@@ -129,27 +129,12 @@ button {
 .nav-logo {
     display: flex;
     align-items: center;
-    gap: 10px;
     font-family: var(--font-display);
     font-size: 22px;
     font-weight: 600;
     color: var(--dark);
     text-decoration: none;
     letter-spacing: -0.02em;
-}
-
-.nav-logo-monogram {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
-    background: var(--accent);
-    color: var(--white);
-    font-size: 14px;
-    font-weight: 700;
-    letter-spacing: 0;
 }
 
 .nav-links {
@@ -180,12 +165,18 @@ button {
     transition: width 0.25s var(--ease-out);
 }
 
-.nav-link:hover {
+.nav-link:hover,
+.nav-link[aria-current="page"] {
     color: var(--dark);
 }
 
-.nav-link:hover::after {
+.nav-link:hover::after,
+.nav-link[aria-current="page"]::after {
     width: 100%;
+}
+
+.mobile-nav-link[aria-current="page"] {
+    color: var(--accent) !important;
 }
 
 .nav-actions {
@@ -350,23 +341,8 @@ html.dark .theme-icon-moon {
 .footer-logo {
     display: inline-flex;
     align-items: center;
-    gap: 12px;
     text-decoration: none;
     margin-bottom: var(--space-sm);
-}
-
-.footer-logo-monogram {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    background: var(--accent);
-    color: #fff;
-    font-size: 16px;
-    font-weight: 700;
-    font-family: var(--font-display);
 }
 
 .footer-logo-text {
@@ -461,6 +437,22 @@ html.dark .theme-icon-moon {
     color: rgba(255, 255, 255, 0.45);
 }
 
+.footer-decoration {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    pointer-events: none;
+    z-index: 0;
+    opacity: 0.15;
+    transform: translate(15%, 25%);
+}
+
+.footer-decoration svg {
+    display: block;
+    width: clamp(200px, 30vw, 400px);
+    height: auto;
+}
+
 
 /* ─── 15. KEYFRAMES ────────────────────────────── */
 @keyframes fade-slide-up {
@@ -494,6 +486,55 @@ html.dark .theme-icon-moon {
     50%      { transform: translateY(-6px); }
 }
 
+/* ─── 17. PREFERS-REDUCED-MOTION ────────────────── */
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+    }
+
+    .hero-photo-card {
+        transition: none !important;
+    }
+
+    .canvas-bg {
+        opacity: 0.2;
+    }
+
+    .hero-typing-text { animation: none !important; }
+    .typing-cursor { display: none; }
+}
+
+/* ─── 17b. CONTENT-VISIBILITY ───────────────────── */
+.marquee-section,
+.site-footer,
+#experience-section,
+#about-section {
+    content-visibility: auto;
+    contain-intrinsic-size: 0 500px;
+}
+
+/* ─── 18c. FOCUS-RING ───────────────────────────── */
+:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 2px;
+}
+
+a:focus-visible,
+button:focus-visible {
+    box-shadow: 0 0 0 3px var(--accent-muted);
+}
+
+/* ─── 18d. BUTTON ACTIVE STATE ──────────────────── */
+a:active,
+button:active {
+    transform: scale(0.97);
+    transition: transform 100ms var(--ease-out);
+}
+
 /* ─── 16. DARK MODE ────────────────────────────── */
 html.dark {
     color-scheme: dark;
@@ -501,7 +542,7 @@ html.dark {
     --white: #1A1A2E;
     --paper: #1A1A2E;
     --dark: #F0F0F5;
-    --gray: #9CA3AF;
+    --gray: #B0B0B8;
     --light-gray: #1E1E32;
     --border: #2D2D48;
     --border-strong: #3D3D5C;
@@ -509,6 +550,11 @@ html.dark {
     --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
     --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.4);
     --shadow-lg: 0 16px 48px rgba(0, 0, 0, 0.5);
+}
+
+html.dark .navbar {
+    background: rgba(13, 13, 26, 0.6);
+    backdrop-filter: blur(8px);
 }
 
 html.dark .navbar.scrolled {

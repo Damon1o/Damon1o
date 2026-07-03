@@ -11,7 +11,12 @@
 <section class="about-page">
     <div class="about-intro reveal">
         <div class="about-photo">
-            <span class="about-photo-monogram">DL</span>
+            <div class="about-photo-placeholder" aria-hidden="true">
+                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                    <circle cx="12" cy="7" r="4"/>
+                </svg>
+            </div>
         </div>
         <h1 class="about-name">{{ site_config.hero.name }}</h1>
         <p class="about-tagline">{{ site_config.hero.subtitle }}</p>

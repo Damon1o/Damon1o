@@ -29,9 +29,9 @@
             <input class="project-search" type="text" name="search" value="{{ search_query }}" placeholder="Search projects..." aria-label="Search projects">
         </div>
         <div class="filter-tags">
-            <a href="{{ url_for('projects') }}" class="filter-tag {% if not active_tag %}active{% endif %}">All</a>
-            {% for tag in all_tags %}
-            <a href="{{ url_for('projects', tag=tag, search=search_query) }}" class="filter-tag {% if active_tag == tag %}active{% endif %}">{{ tag }}</a>
+            <a href="{{ url_for('projects') }}" class="filter-tag {% if not active_category %}active{% endif %}">All</a>
+            {% for category in all_categories %}
+            <a href="{{ url_for('projects', tag=category, search=search_query) }}" class="filter-tag {% if active_category == category %}active{% endif %}">{{ category }}</a>
             {% endfor %}
         </div>
         <p class="filter-count">Showing {{ filtered_projects|length }} of {{ total_count }} projects</p>

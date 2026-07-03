@@ -4,7 +4,7 @@ function initTyping() {
     const cursorEl = document.querySelector('.typing-cursor');
     if (!textEl || !cursorEl) return;
 
-        const phrases = ['I design', 'I build', 'I create'];
+    const phrases = ['I design', 'I build', 'I create'];
     const typeSpeed = 70;
     const deleteSpeed = 40;
     const pause = 2000;
@@ -53,20 +53,27 @@ function initParallax() {
     const photoWrappers = document.querySelectorAll('.hero-photo-wrapper');
     if (!heroContent && !photoWrappers.length) return;
 
+    const applyParallax = (scrollY) => {
+        if (heroContent) {
+            heroContent.style.transform = `translateY(${scrollY * 0.08}px)`;
+            heroContent.style.opacity = Math.max(0, 1 - scrollY / (window.innerHeight * 1.2));
+        }
+        photoWrappers.forEach((el) => {
+            const speed = parseFloat(el.dataset.parallax) || 0.08;
+            const baseRotate = el.dataset.rotate || '0deg';
+            el.style.transform = `rotate(${baseRotate}) translateY(${scrollY * speed}px)`;
+        });
+    };
+
+    applyParallax(window.scrollY);
+
     let ticking = false;
     const onScroll = () => {
         if (!ticking) {
             requestAnimationFrame(() => {
                 const scrollY = window.scrollY;
                 if (scrollY < window.innerHeight) {
-                    if (heroContent) {
-                        heroContent.style.transform = `translateY(${scrollY * 0.08}px)`;
-                        heroContent.style.opacity = 1 - scrollY / (window.innerHeight * 1.2);
-                    }
-                    photoWrappers.forEach((el) => {
-                        const speed = parseFloat(el.dataset.parallax) || 0.08;
-                        el.style.transform = `translateY(${scrollY * speed}px)`;
-                    });
+                    applyParallax(scrollY);
                 }
                 ticking = false;
             });

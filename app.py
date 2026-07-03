@@ -82,18 +82,18 @@ def projects():
     tag = request.args.get('tag', '').strip()
     search = request.args.get('search', '').strip().lower()
 
-    all_tags = sorted(set(t for p in all_projects for t in p.get('tags', [])))
+    all_categories = sorted(set(p.get('category', '') for p in all_projects if p.get('category')) | {'Games', 'Hardware'})
 
     filtered = all_projects
     if tag:
-        filtered = [p for p in filtered if tag in p.get('tags', [])]
+        filtered = [p for p in filtered if p.get('category', '') == tag]
     if search:
         filtered = [p for p in filtered if search in p.get('title', '').lower() or search in p.get('description', '').lower()]
 
     return render_template('projects.html',
                            filtered_projects=filtered,
-                           all_tags=all_tags,
-                           active_tag=tag,
+                           all_categories=all_categories,
+                           active_category=tag,
                            search_query=search,
                            total_count=len(all_projects))
 

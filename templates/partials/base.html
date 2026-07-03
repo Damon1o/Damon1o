@@ -4,17 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="{% block meta_description %}{{ site_config.hero.name }} — CS Student & Aspiring Engineer{% endblock %}">
-    <meta name="theme-color" content="#C8744D">
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#FAFAFA">
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0D0D1A">
 
     <meta property="og:title" content="{% block og_title %}{{ site_config.hero.name }}{% endblock %}">
     <meta property="og:description" content="{% block og_description %}{{ site_config.hero.name }} — CS Student & Aspiring Engineer{% endblock %}">
     <meta property="og:type" content="{% block og_type %}website{% endblock %}">
     <meta property="og:url" content="{% block og_url %}{{ request.url }}{% endblock %}">
-    <meta name="twitter:card" content="{% block twitter_card %}summary{% endblock %}">
-    <meta property="og:image" content="{% block og_image %}data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='1200' height='630' viewBox='0 0 1200 630'><rect width='1200' height='630' fill='%23C8744D'/><text x='600' y='330' text-anchor='middle' font-family='Fraunces,Georgia,serif' font-size='200' font-weight='700' fill='%23FFFFFF'>DL</text><text x='600' y='430' text-anchor='middle' font-family='Fraunces,Georgia,serif' font-size='48' fill='rgba(255,255,255,0.85)'>Damon Lin</text></svg>{% endblock %}">
+    <meta name="twitter:card" content="{% block twitter_card %}summary_large_image{% endblock %}">
+    <meta property="og:image" content="{% block og_image %}{{ url_for('static', filename='images/portfolio-web-app.png', _external=True) }}{% endblock %}">
 
-    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><circle cx='16' cy='16' r='15' fill='%23C8744D'/><text x='16' y='22' text-anchor='middle' font-family='Fraunces,Georgia,serif' font-size='14' font-weight='700' fill='%23FFFFFF'>DL</text></svg>">
-    <link rel="apple-touch-icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'><rect width='180' height='180' rx='36' fill='%23C8744D'/><text x='90' y='128' text-anchor='middle' font-family='Fraunces,Georgia,serif' font-size='84' font-weight='700' fill='%23FFFFFF'>DL</text></svg>">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><circle cx='16' cy='16' r='15' fill='%23C8744D'/></svg>">
+    <link rel="apple-touch-icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 180'><rect width='180' height='180' rx='36' fill='%23C8744D'/></svg>">
 
     {% block structured_data %}
     <script type="application/ld+json">
@@ -39,6 +40,9 @@
     <script>
     (function(){var t=localStorage.getItem('portfolio-theme');if(!t)t=window.matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light';document.documentElement.classList.toggle('dark',t==='dark');document.documentElement.style.colorScheme=t;})();
     </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,100..900;1,9..144,100..900&family=Outfit:wght@100..900&family=JetBrains+Mono:ital,wght@0,100..800;1,100..800&display=swap">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/core.css') }}">
     {% block extra_css %}{% endblock %}
 
@@ -50,8 +54,8 @@
     gtag('js', new Date());
     gtag('config', '{{ site_config.analytics.google_analytics_id }}');
     </script>
-    {% elif site_config.analytics.provider == "plausible" and site_config.analytics.google_analytics_id %}
-    <script defer data-domain="yourdomain.com" src="https://plausible.io/js/script.js"></script>
+    {% elif site_config.analytics.provider == "plausible" %}
+    <script defer data-domain="{{ request.host }}" src="https://plausible.io/js/script.js"></script>
     {% endif %}
 </head>
 <body>

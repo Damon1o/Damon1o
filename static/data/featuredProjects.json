@@ -5,6 +5,7 @@
             "title": "V5RC Robotics Web App",
             "category": "Web Application",
             "cover-image": "images/v5rc-robotics-web-app.png",
+            "featured": true,
             "tags": [
                 "Python",
                 "Javascript",
@@ -19,8 +20,8 @@
         {
             "id": "2",
             "title": "Personal Portfolio",
-            "category": "Website",
-            "cover-image": "images/blank.png",
+            "category": "Web Application",
+            "cover-image": "images/portfolio-web-app.png",
             "tags": [
                 "Flask",
                 "CSS",
@@ -29,7 +30,7 @@
             "description": "A warm, organic personal portfolio showcasing my work and experience as an aspiring software engineer.",
             "links": {
                 "github": "https://github.com/Damon1o/portfolio",
-                "website": "#"
+                "website": "/"
             }
         },
         {

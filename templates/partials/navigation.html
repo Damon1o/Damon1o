@@ -1,15 +1,13 @@
 <header class="navbar" id="navbar">
     <a href="{{ url_for('index') }}" class="nav-logo">
-        <span class="nav-logo-monogram">DL</span>
         <span class="nav-logo-text">Damon Lin</span>
     </a>
 
+    {% set nav_items = [('index', 'Home'), ('projects', 'Projects'), ('experience', 'Experience'), ('about', 'About'), ('contact', 'Contact')] %}
     <nav class="nav-links">
-        <a href="{{ url_for('index') }}" class="nav-link">Home</a>
-        <a href="{{ url_for('projects') }}" class="nav-link">Projects</a>
-        <a href="{{ url_for('experience') }}" class="nav-link">Experience</a>
-        <a href="{{ url_for('about') }}" class="nav-link">About</a>
-        <a href="{{ url_for('contact') }}" class="nav-link">Contact</a>
+        {% for endpoint, label in nav_items %}
+        <a href="{{ url_for(endpoint) }}" class="nav-link"{% if request.endpoint == endpoint %} aria-current="page"{% endif %}>{{ label }}</a>
+        {% endfor %}
     </nav>
 
     <div class="nav-actions">
@@ -37,11 +35,9 @@
     </div>
 
     <div class="mobile-menu" id="mobileMenu">
-        <a href="{{ url_for('index') }}" class="mobile-nav-link">Home</a>
-        <a href="{{ url_for('projects') }}" class="mobile-nav-link">Projects</a>
-        <a href="{{ url_for('experience') }}" class="mobile-nav-link">Experience</a>
-        <a href="{{ url_for('about') }}" class="mobile-nav-link">About</a>
-        <a href="{{ url_for('contact') }}" class="mobile-nav-link">Contact</a>
+        {% for endpoint, label in nav_items %}
+        <a href="{{ url_for(endpoint) }}" class="mobile-nav-link"{% if request.endpoint == endpoint %} aria-current="page"{% endif %}>{{ label }}</a>
+        {% endfor %}
     </div>
 </header>
 

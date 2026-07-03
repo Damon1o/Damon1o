@@ -2,6 +2,9 @@
     <div class="project-card-image">
         <img src="{{ url_for('static', filename=project['cover-image']) }}" alt="{{ project.title }}" loading="lazy">
         <span class="project-card-category">{{ project.category }}</span>
+        {% if project.get('featured') %}
+        <span class="corner-badge">Featured</span>
+        {% endif %}
     </div>
     <div class="project-card-body">
         <h3>{{ project.title }}</h3>

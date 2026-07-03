@@ -355,6 +355,7 @@ const ThemeToggle = {
     set(mode) {
         localStorage.setItem(this.key, mode);
         document.documentElement.classList.toggle('dark', mode === 'dark');
+        document.documentElement.dispatchEvent(new CustomEvent('themechange', { detail: { mode: mode } }));
     },
     getIcon() {
         return this.get() === 'dark'

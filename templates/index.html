@@ -11,15 +11,18 @@
 {% endblock %}
 
 {% block extra_js %}
+<script src="{{ url_for('static', filename='js/pages/hero-background.js') }}"></script>
 <script src="{{ url_for('static', filename='js/pages/index.js') }}"></script>
 {% endblock %}
 
 {% block content %}
 
 <section class="hero">
+    <canvas class="hero-canvas" id="heroCanvas" aria-hidden="true"></canvas>
+
     <div class="hero-photos-left" aria-hidden="true">
         {% for photo in hero_photos.left %}
-        <div class="hero-photo-wrapper" style="top: {{ photo.top }}px; left: {{ photo.left }}px; transform: rotate({{ photo.rotation }}deg); z-index: {{ photo.z }};" data-parallax="{{ photo.parallax }}">
+        <div class="hero-photo-wrapper" style="top: {{ photo.top }}px; left: {{ photo.left }}px; --rotate: {{ photo.rotation }}deg; z-index: {{ photo.z }};" data-parallax="{{ photo.parallax }}" data-rotate="{{ photo.rotation }}deg">
             <div class="hero-photo-card">
                 <img src="{{ url_for('static', filename=photo.image) }}" alt="" loading="lazy" sizes="(max-width: 1023px) 0px, 370px" />
             </div>
@@ -29,7 +32,7 @@
 
     <div class="hero-photos-right" aria-hidden="true">
         {% for photo in hero_photos.right %}
-        <div class="hero-photo-wrapper" style="top: {{ photo.top }}px; right: {{ photo.right }}px; transform: rotate({{ photo.rotation }}deg); z-index: {{ photo.z }};" data-parallax="{{ photo.parallax }}">
+        <div class="hero-photo-wrapper" style="top: {{ photo.top }}px; right: {{ photo.right }}px; --rotate: {{ photo.rotation }}deg; z-index: {{ photo.z }};" data-parallax="{{ photo.parallax }}" data-rotate="{{ photo.rotation }}deg">
             <div class="hero-photo-card">
                 <img src="{{ url_for('static', filename=photo.image) }}" alt="" loading="lazy" sizes="(max-width: 1023px) 0px, 370px" />
             </div>
@@ -91,6 +94,122 @@
                 {% for project in projects %}
                     {% include "partials/project-marquee-card.html" %}
                 {% endfor %}
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="flow-section">
+    <div class="section-header reveal">
+        <span class="section-overline">How it works</span>
+        <h2>From zero to built</h2>
+    </div>
+    <div class="flow-grid">
+        <div class="flow-step reveal" data-delay="1">
+            <div class="flow-step-number">1</div>
+            <h3>Explore my work</h3>
+            <p>Check out projects I've shipped — from robotics platforms to hackathon tools.</p>
+        </div>
+        <div class="flow-step reveal" data-delay="2">
+            <div class="flow-step-number">2</div>
+            <h3>Learn about me</h3>
+            <p>Read my story, experience, and what drives me as a builder and CS student.</p>
+        </div>
+        <div class="flow-step reveal" data-delay="3">
+            <div class="flow-step-number">3</div>
+            <h3>Get in touch</h3>
+            <p>Reach out if you want to collaborate, chat, or build something together.</p>
+        </div>
+    </div>
+</section>
+
+<section class="toolbox-section">
+    <div class="section-header reveal">
+        <span class="section-overline">What I use</span>
+        <h2>Tools of the trade</h2>
+        <p>The languages, frameworks, and platforms I reach for daily.</p>
+    </div>
+    <div class="toolbox-grid reveal" data-delay="1">
+        <div class="toolbox-item">
+            <svg class="toolbox-item-icon" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/>
+            </svg>
+            <span class="toolbox-item-name">Python</span><span class="toolbox-item-label">Main Language</span>
+        </div>
+        <div class="toolbox-item">
+            <svg class="toolbox-item-icon" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="3" width="18" height="18" rx="3"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/>
+            </svg>
+            <span class="toolbox-item-name">Flask</span><span class="toolbox-item-label">Backend</span>
+        </div>
+        <div class="toolbox-item">
+            <svg class="toolbox-item-icon" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/>
+            </svg>
+            <span class="toolbox-item-name">JavaScript</span><span class="toolbox-item-label">Frontend</span>
+        </div>
+        <div class="toolbox-item">
+            <svg class="toolbox-item-icon" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10"/><path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20"/><path d="M2 12h20"/>
+            </svg>
+            <span class="toolbox-item-name">CSS</span><span class="toolbox-item-label">Styling</span>
+        </div>
+        <div class="toolbox-item">
+            <svg class="toolbox-item-icon" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/>
+            </svg>
+            <span class="toolbox-item-name">MongoDB</span><span class="toolbox-item-label">Database</span>
+        </div>
+        <div class="toolbox-item">
+            <svg class="toolbox-item-icon" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <polygon points="12 2 22 8.5 22 15.5 12 22 2 15.5 2 8.5 12 2"/><line x1="12" y1="22" x2="12" y2="15.5"/><polyline points="22 8.5 12 15.5 2 8.5"/>
+            </svg>
+            <span class="toolbox-item-name">Vercel</span><span class="toolbox-item-label">Deployment</span>
+        </div>
+        <div class="toolbox-item">
+            <svg class="toolbox-item-icon" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="3"/><circle cx="19" cy="12" r="3"/><circle cx="5" cy="12" r="3"/><line x1="8" y1="12" x2="16" y2="12"/><line x1="15" y1="8.5" x2="16.5" y2="5"/><line x1="7.5" y1="5" x2="8.5" y2="8.5"/>
+            </svg>
+            <span class="toolbox-item-name">Git</span><span class="toolbox-item-label">Version Control</span>
+        </div>
+        <div class="toolbox-item">
+            <svg class="toolbox-item-icon" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <rect x="3" y="3" width="18" height="18" rx="3"/><circle cx="12" cy="12" r="4"/><path d="M12 2v4"/><path d="M12 18v4"/><path d="M2 12h4"/><path d="M18 12h4"/>
+            </svg>
+            <span class="toolbox-item-name">Robotics</span><span class="toolbox-item-label">Hardware</span>
+        </div>
+        <div class="toolbox-item">
+            <svg class="toolbox-item-icon" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/>
+            </svg>
+            <span class="toolbox-item-name">Claude Code</span><span class="toolbox-item-label">AI Assistant</span>
+        </div>
+        <div class="toolbox-item">
+            <svg class="toolbox-item-icon" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/>
+            </svg>
+            <span class="toolbox-item-name">OpenCode</span><span class="toolbox-item-label">CLI Tool</span>
+        </div>
+        <div class="toolbox-item">
+            <svg class="toolbox-item-icon" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M15 14c.89.89 2.33 1.45 4 1.45s3.11-.56 4-1.45"/><path d="M15 10c.89.89 2.33 1.45 4 1.45s3.11-.56 4-1.45"/><rect x="2" y="3" width="12" height="18" rx="2"/><path d="M8 8h0"/><path d="M8 12h0"/>
+            </svg>
+            <span class="toolbox-item-name">Antigravity</span><span class="toolbox-item-label">AI Platform</span>
+        </div>
+    </div>
+</section>
+
+<section class="now-section">
+    <div class="section-header reveal">
+        <span class="section-overline">Now</span>
+        <h2>What I'm building</h2>
+        <p>This is what I'm working on right now. Inspired by <a href="https://nownownow.com/about" target="_blank" rel="noopener" class="now-movement-link">the /now movement</a>.</p>
+    </div>
+    <div class="now-card-wrap">
+        <div class="marquee-card now-card reveal" data-delay="1">
+            <div class="marquee-card-body">
+                <h3>Preparing for college applications</h3>
+                <p>Building projects that matter, learning continuously, and staying curious.</p>
             </div>
         </div>
     </div>

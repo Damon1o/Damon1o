@@ -1,9 +1,17 @@
 <footer class="site-footer">
+    <div class="footer-decoration" aria-hidden="true">
+        <svg viewBox="0 0 400 400" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="300" cy="300" r="180" stroke="currentColor" stroke-width="1" fill="none" opacity="0.3"/>
+            <circle cx="300" cy="300" r="120" stroke="currentColor" stroke-width="1" fill="none" opacity="0.5"/>
+            <circle cx="300" cy="300" r="60" stroke="currentColor" stroke-width="1" fill="none" opacity="0.7"/>
+            <line x1="120" y1="300" x2="480" y2="300" stroke="currentColor" stroke-width="0.5" opacity="0.2"/>
+            <line x1="300" y1="120" x2="300" y2="480" stroke="currentColor" stroke-width="0.5" opacity="0.2"/>
+        </svg>
+    </div>
     <div class="footer-container">
         <div class="footer-top">
             <div class="footer-brand">
                 <a href="{{ url_for('index') }}" class="footer-logo">
-                    <span class="footer-logo-monogram">DL</span>
                     <span class="footer-logo-text">{{ site_config.hero.name }}</span>
                 </a>
                 <p class="footer-tagline">CS Student. Builder. Hack Clubber.</p>

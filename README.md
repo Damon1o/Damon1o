@@ -140,6 +140,12 @@ All data lives in flat JSON files under `static/data/` — no database migration
 
 This app runs anywhere that supports WSGI.
 
+### Vercel
+
+`vercel.json` is already configured. Install the [Vercel CLI](https://vercel.com/docs/cli) and run `vercel`, or import the repo at vercel.com. Set `SECRET_KEY` (required — without it, admin sessions break across serverless cold starts) and optionally `SMTP_PASSWORD` in the project's environment variables.
+
+**Serverless caveat**: Vercel's filesystem is read-only, so runtime writes don't persist — admin panel edits, image uploads, and contact-message storage are disabled there. Manage content by editing the JSON files under `static/data/` and redeploying. The contact form still works: email notification is sent if SMTP is configured, but messages won't appear in the admin dashboard.
+
 ### Heroku / Render / Railway
 
 The `Procfile` is already configured:

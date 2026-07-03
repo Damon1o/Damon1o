@@ -1,21 +1,84 @@
 {% extends "partials/base.html" %}
 
-{% block title %}Privacy — {{ site_config.hero.name }}{% endblock %}
+{% block title %}Privacy Policy — {{ site_config.hero.name }}{% endblock %}
 
 {% block canonical %}<link rel="canonical" href="{{ url_for('privacy', _external=True) }}">{% endblock %}
 
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/pages/legal.css') }}">
+{% endblock %}
+
 {% block content %}
-<section class="about-page">
-    <div class="section-header reveal">
+<section class="legal-page">
+    <div class="legal-header reveal">
         <span class="section-overline">Legal</span>
         <h1>Privacy Policy</h1>
+        <p class="legal-updated">Last updated: July 3, 2026</p>
     </div>
 
-    <div class="about-bio reveal">
-        <p>This is a personal portfolio site. No personal data is collected or shared.</p>
-        <p>Contact form messages are stored locally and never shared with third parties.</p>
-        <p>This site does not use tracking cookies or sell any information.</p>
+    <div class="legal-summary reveal">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+        </svg>
+        <p><strong>The short version:</strong> this site doesn't track you. There are no analytics, no advertising, and no tracking cookies. The only personal information handled here is what you choose to send through the contact form.</p>
     </div>
+
+    <div class="legal-sections">
+        <div class="legal-section reveal">
+            <h2>Information You Provide</h2>
+            <p>If you reach out through the contact form, the site collects the details you enter — your name, email address, subject, and message. That's it. Nothing is collected automatically in the background, and you can browse every page of this site without providing any personal information at all.</p>
+        </div>
+
+        <div class="legal-section reveal">
+            <h2>How Your Information Is Used</h2>
+            <p>Messages sent through the contact form are used for one purpose: so I can read and respond to them. Specifically:</p>
+            <ul>
+                <li>Messages are stored privately on the server where this site runs.</li>
+                <li>Your message may also trigger an email notification to me so I don't miss it.</li>
+                <li>Your information is <strong>never sold, rented, or shared</strong> with third parties.</li>
+            </ul>
+        </div>
+
+        <div class="legal-section reveal">
+            <h2>Cookies &amp; Local Storage</h2>
+            <p>This site does not use tracking or advertising cookies. A minimal session cookie may be set for essential functionality, such as showing a confirmation message after you submit the contact form. Your light/dark theme preference is saved in your browser's local storage — it never leaves your device and doesn't identify you.</p>
+        </div>
+
+        <div class="legal-section reveal">
+            <h2>Analytics &amp; Third Parties</h2>
+            <p>No analytics or tracking services are used on this site. Pages link out to external services such as <a href="{{ site_config.contact.github }}" target="_blank" rel="noopener noreferrer">GitHub</a> and <a href="{{ site_config.contact.linkedin }}" target="_blank" rel="noopener noreferrer">LinkedIn</a> — once you follow those links, their own privacy policies apply.</p>
+        </div>
+
+        <div class="legal-section reveal">
+            <h2>Data Retention &amp; Your Rights</h2>
+            <p>Contact messages are kept only as long as needed to respond and follow up. If you'd like a message you sent to be deleted, just ask — email me and I'll remove it.</p>
+        </div>
+
+        <div class="legal-section reveal">
+            <h2>Changes to This Policy</h2>
+            <p>If this site's practices ever change, this page will be updated to reflect that, along with a new "last updated" date at the top.</p>
+        </div>
+
+        <div class="legal-section reveal">
+            <h2>Contact</h2>
+            <p>Questions about this policy or your data? I'm happy to help.</p>
+            <div class="legal-contact">
+                <div class="legal-contact-text">
+                    <h3>Get in touch</h3>
+                    <p>{{ site_config.contact.email }}</p>
+                </div>
+                <a href="mailto:{{ site_config.contact.email }}" class="legal-contact-button">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                        <polyline points="22,6 12,13 2,6"/>
+                    </svg>
+                    Send an email
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <p class="legal-crosslink reveal">Also see the <a href="{{ url_for('terms') }}">Terms of Use</a>.</p>
 </section>
 
 {% include "partials/footer.html" %}

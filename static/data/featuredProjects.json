@@ -29,13 +29,13 @@
             ],
             "description": "A warm, organic personal portfolio showcasing my work and experience as an aspiring software engineer.",
             "links": {
-                "github": "https://github.com/Damon1o/portfolio",
+                "github": "https://github.com/Damon1o/damon1o",
                 "website": "/"
             }
         },
         {
             "id": "3",
-            "title": "Hack CLub Leader Web App",
+            "title": "Hack Club Leader Web App",
             "category": "Web Application",
             "cover-image": "images/hack-club-leader-web-app.png",
             "tags": [
@@ -47,6 +47,118 @@
             "links": {
                 "github": "https://github.com/Damon1o/task-manager",
                 "website": "https://hackclub-leaders.vercel.app/"
+            }
+        },
+        {
+            "id": "4",
+            "title": "Template",
+            "category": "Web Application",
+            "cover-image": "images/Template.png",
+            "tags": [
+                "HTML",
+                "CSS",
+                "Javascript"
+            ],
+            "description": "A simple web template with smooth animations and a modern design.",
+            "links": {
+                "github": "https://github.com/Damon1o/template",
+                "website": "https://template.vercel.app/"
+            }
+        },
+        {
+            "id": "5",
+            "title": "Template",
+            "category": "Web Application",
+            "cover-image": "images/Template.png",
+            "tags": [
+                "HTML",
+                "CSS",
+                "Javascript"
+            ],
+            "description": "A simple web template with smooth animations and a modern design.",
+            "links": {
+                "github": "https://github.com/Damon1o/template",
+                "website": "https://template.vercel.app/"
+            }
+        },
+        {
+            "id": "6",
+            "title": "Template",
+            "category": "Web Application",
+            "cover-image": "images/Template.png",
+            "tags": [
+                "HTML",
+                "CSS",
+                "Javascript"
+            ],
+            "description": "A simple web template with smooth animations and a modern design.",
+            "links": {
+                "github": "https://github.com/Damon1o/template",
+                "website": "https://template.vercel.app/"
+            }
+        },
+        {
+            "id": "7",
+            "title": "Template",
+            "category": "Web Application",
+            "cover-image": "images/Template.png",
+            "tags": [
+                "HTML",
+                "CSS",
+                "Javascript"
+            ],
+            "description": "A simple web template with smooth animations and a modern design.",
+            "links": {
+                "github": "https://github.com/Damon1o/template",
+                "website": "https://template.vercel.app/"
+            }
+        },
+        {
+            "id": "8",
+            "title": "Template",
+            "category": "Web Application",
+            "cover-image": "images/Template.png",
+            "tags": [
+                "HTML",
+                "CSS",
+                "Javascript"
+            ],
+            "description": "A simple web template with smooth animations and a modern design.",
+            "links": {
+                "github": "https://github.com/Damon1o/template",
+                "website": "https://template.vercel.app/"
+            }
+        },
+        {
+            "id": "9",
+            "title": "Template",
+            "category": "Web Application",
+            "cover-image": "images/Template.png",
+            "tags": [
+                "HTML",
+                "CSS",
+                "Javascript"
+            ],
+            "description": "A simple web template with smooth animations and a modern design.",
+            "links": {
+                "github": "https://github.com/Damon1o/template",
+                "website": "https://template.vercel.app/"
+            }
+        },
+        {
+            "id": "10",
+            "title": "Template",
+            "category": "Web Application",
+            "cover-image": "images/Template.png",
+            "tags": [
+                "HTML",
+                "CSS",
+                "Javascript"
+            ],
+            "description": "A simple web template with smooth animations and a modern design.",
+            "links": {
+                "github": "https://github.com/Damon1o/template",
+                "website": "https://template.vercel.app/"
             }
         }
     ]

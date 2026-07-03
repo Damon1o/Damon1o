@@ -1,0 +1,11 @@
+.claude/
+.opencode/
+.github/
+.pytest_cache/
+__pycache__/
+tests/
+.env
+CHATBOT.md
+opencode.json
+Procfile
+pytest.ini

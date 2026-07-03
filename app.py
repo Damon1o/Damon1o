@@ -20,7 +20,10 @@ DATA_DIR = 'static/data'
 UPLOAD_FOLDER = 'static/uploads'
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif', 'webp', 'svg'}
 
-os.makedirs(UPLOAD_FOLDER, exist_ok=True)
+try:
+    os.makedirs(UPLOAD_FOLDER, exist_ok=True)
+except OSError:
+    pass  # read-only filesystem on serverless hosts (e.g. Vercel)
 
 
 def read_json(filename):
@@ -31,8 +34,13 @@ def read_json(filename):
 
 def write_json(filename, data):
     path = os.path.join(DATA_DIR, filename)
-    with open(path, 'w', encoding='utf-8') as f:
-        json.dump(data, f, indent=4, ensure_ascii=False)
+    try:
+        with open(path, 'w', encoding='utf-8') as f:
+            json.dump(data, f, indent=4, ensure_ascii=False)
+    except OSError as e:
+        # serverless hosts have a read-only filesystem; content edits only
+        # persist when made in the repo and redeployed
+        app.logger.warning(f'Could not persist {filename}: {e}')
 
 
 def login_required(f):
@@ -52,7 +60,10 @@ def _save_uploaded_image(file):
     if file and _allowed_file(file.filename):
         ext = file.filename.rsplit('.', 1)[1].lower()
         filename = f'{uuid.uuid4().hex}.{ext}'
-        file.save(os.path.join(UPLOAD_FOLDER, filename))
+        try:
+            file.save(os.path.join(UPLOAD_FOLDER, filename))
+        except OSError:
+            return None  # read-only filesystem on serverless hosts
         return f'uploads/{filename}'
     return None
 

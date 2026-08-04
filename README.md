@@ -1,72 +1,11 @@
-# Damon Lin — Portfolio
+<h1 align="center">Hello Damon Lin</h1>
+<h3 align="center">I'm currently a high school student in New York</h3>
 
-## Features
+<h3 align="left">Connect with me:</h3>
+<p align="left">
+<a href="https://linkedin.com/in/damon1o" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/linked-in-alt.svg" alt="damon1o" height="30" width="40" /></a>
+<a href="https://instagram.com/damon.1o" target="blank"><img align="center" src="https://raw.githubusercontent.com/rahuldkjain/github-profile-readme-generator/master/src/images/icons/Social/instagram.svg" alt="damon.1o" height="30" width="40" /></a>
+</p>
 
-- **Canvas particle background** — DPR-aware interactive particle field with glow effects and mouse repulsion, gracefully degrades for reduced-motion users
-- **Dark/Light mode** — Theme toggle persisted to `localStorage`, driven entirely by CSS variables
-- **Project showcase** — Filterable project grid with tag-based search, GitHub and live-site links
-- **Experience timeline** — Learning journey and hackathon history with tagged skills
-- **Hero photo cards** — Parallax-floating skill cards flanking the hero section with scroll-driven motion
-- **Typewriter animation** — Sequential subtitle text reveal on the hero
-- **Scroll-triggered reveals** — Elements fade and slide in as they enter the viewport
-- **Contact form** — Saves messages to JSON; optional email notification via SMTP (Gmail)
-- **Admin panel** — Password-protected dashboard to manage projects, experience entries, site config, and contact messages — all via JSON files
-- **Responsive design** — Fluid typography scale (`clamp`), content-aware breakpoints, mobile nav
-- **SEO** — Auto-generated `sitemap.xml` and `robots.txt`
-- **Custom error pages** — Styled 404 and 500 pages
-
-## Project Structure
-
-```
-portfolio/
-├── app.py                      # Main Flask application
-├── wsgi.py                     # WSGI entry point for production
-├── Procfile                    # Heroku/Render process definition
-├── requirements.txt            # Python dependencies
-├── .env.example                # Environment variable template
-├── .gitignore
-├── templates/
-│   ├── partials/
-│   │   ├── base.html           # Root layout (head, scripts, nav, footer)
-│   │   ├── navigation.html     # Top nav bar with theme toggle
-│   │   ├── footer.html         # Site footer
-│   │   ├── project-card.html   # Project grid card
-│   │   └── project-marquee-card.html  # Marquee project card
-│   ├── admin/
-│   │   ├── login.html          # Admin password login
-│   │   └── dashboard.html      # Content management dashboard
-│   ├── errors/
-│   │   ├── 404.html
-│   │   └── 500.html
-│   ├── index.html              # Home page
-│   ├── projects.html           # Project showcase
-│   ├── experience.html         # Experience & hackathons
-│   ├── about.html              # Bio, skills, values, resume
-│   └── contact.html            # Contact form
-├── static/
-│   ├── css/
-│   │   └── style.css           # All styles (~2500 lines, warm terracotta theme)
-│   ├── js/
-│   │   └── main.js             # Particle canvas, theme toggle, scroll reveals, animations
-│   ├── data/
-│   │   ├── siteConfig.json     # Hero text, contact links, email config, admin password
-│   │   ├── featuredProjects.json  # Project portfolio data
-│   │   ├── experience.json     # Learning journey + hackathon entries
-│   │   ├── about.json          # Bio, skills, values
-│   │   ├── heroPhotos.json     # Floating skill card layout data
-│   │   └── contactMessages.json   # Submitted contact messages
-│   ├── images/                 # Static images and project screenshots
-│   └── files/                  # Downloadable assets (resume, etc.)
-└── .opencode/                  # AI assistant configuration
-```
-
-## Design
-
-The site uses a warm, organic design language:
-
-- **Accent color**: Terracotta `#C8744D` with hover `#B05E39`
-- **Typography**: Fraunces (display headings) + Outfit (body) + JetBrains Mono (code)
-- **Background**: Interactive canvas particle system with glow nodes and mouse interaction
-- **Theme**: Light/dark mode toggle persisted to `localStorage`, controlled via CSS custom properties
-- **Motion**: Scroll-triggered reveals (`IntersectionObserver`), typewriter subtitle animation, parallax hero cards, project card marquee
-- **Design tokens**: Full CSS variable system for spacing, radii, shadows, easing curves, and fluid typography
+<h3 align="left">Languages and Tools:</h3>
+<p align="left"> <a href="https://www.arduino.cc/" target="_blank" rel="noreferrer"> <img src="https://cdn.worldvectorlogo.com/logos/arduino-1.svg" alt="arduino" width="40" height="40"/> </a> <a href="https://aws.amazon.com" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/amazonwebservices/amazonwebservices-original-wordmark.svg" alt="aws" width="40" height="40"/> </a> <a href="https://www.w3schools.com/css/" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/css3/css3-original-wordmark.svg" alt="css3" width="40" height="40"/> </a> <a href="https://git-scm.com/" target="_blank" rel="noreferrer"> <img src="https://www.vectorlogo.zone/logos/git-scm/git-scm-icon.svg" alt="git" width="40" height="40"/> </a> <a href="https://golang.org" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/go/go-original.svg" alt="go" width="40" height="40"/> </a> <a href="https://www.w3.org/html/" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/html5/html5-original-wordmark.svg" alt="html5" width="40" height="40"/> </a> <a href="https://www.java.com" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/java/java-original.svg" alt="java" width="40" height="40"/> </a> <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/javascript/javascript-original.svg" alt="javascript" width="40" height="40"/> </a> <a href="https://www.mongodb.com/" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/mongodb/mongodb-original-wordmark.svg" alt="mongodb" width="40" height="40"/> </a> <a href="https://www.python.org" target="_blank" rel="noreferrer"> <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg" alt="python" width="40" height="40"/> </a> </p>

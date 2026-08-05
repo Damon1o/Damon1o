@@ -8,9 +8,14 @@ class ShaderBackground {
         this.mouse = { x: -9999, y: -9999 };
         this.width = 0;
         this.height = 0;
+        this.subtle = canvas.classList.contains('canvas-bg--subtle');
         this.maxDist = 150;
-        this.mouseRadius = 200;
-        this.particleCount = Math.min(Math.floor(window.innerWidth * 0.08), 140);
+        this.mouseRadius = this.subtle ? 140 : 200;
+        this.repelForce = this.subtle ? 0.3 : 0.5;
+        this.cursorGlow = this.subtle ? 0.025 : 0.04;
+        this.particleCount = this.subtle
+            ? Math.min(Math.floor(window.innerWidth * 0.045), 80)
+            : Math.min(Math.floor(window.innerWidth * 0.08), 140);
         this.glowCount = Math.floor(this.particleCount * 0.12);
         this.cellSize = this.maxDist;
         this.grid = {};
@@ -154,7 +159,7 @@ class ShaderBackground {
             const dy = p.y - this.mouse.y;
             const dist = Math.sqrt(dx * dx + dy * dy);
             if (dist < this.mouseRadius && dist > 0.5) {
-                const force = (1 - dist / this.mouseRadius) * 0.5;
+                const force = (1 - dist / this.mouseRadius) * this.repelForce;
                 p.x += (dx / dist) * force;
                 p.y += (dy / dist) * force;
             }
@@ -167,7 +172,7 @@ class ShaderBackground {
             this.mouse.x, this.mouse.y, 0,
             this.mouse.x, this.mouse.y, this.mouseRadius
         );
-        grd.addColorStop(0, 'rgba(200, 116, 77, 0.04)');
+        grd.addColorStop(0, `rgba(200, 116, 77, ${this.cursorGlow})`);
         grd.addColorStop(1, 'rgba(200, 116, 77, 0)');
         this.ctx.fillStyle = grd;
         this.ctx.fillRect(0, 0, this.width, this.height);

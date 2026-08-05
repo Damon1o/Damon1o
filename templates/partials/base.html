@@ -61,7 +61,7 @@
 <body>
     <a href="#main-content" class="skip-to-content">Skip to content</a>
 
-    <canvas class="canvas-bg" id="shaderCanvas" aria-hidden="true"></canvas>
+    <canvas class="canvas-bg{% if request.endpoint != 'index' %} canvas-bg--subtle{% endif %}" id="shaderCanvas" aria-hidden="true"></canvas>
 
     {% include "partials/navigation.html" %}
 

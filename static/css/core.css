@@ -103,6 +103,11 @@ button {
     opacity: 0.6;
 }
 
+/* quieter variant for inner pages — index keeps the full field */
+.canvas-bg--subtle {
+    opacity: 0.35;
+}
+
 /* ─── 6. NAVIGATION ───────────────────────────── */
 .navbar {
     position: fixed;

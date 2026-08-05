@@ -1,4 +1,4 @@
-<center> <img src=".github/assets/terminal.svg" alt="damon lin — cs student, hack club lead, v5rc robotics" width="760"> </center>
+<img src=".github/assets/terminal.svg" alt="damon lin — cs student, hack club lead, v5rc robotics" width="760">
 
 Long Island. CS student. I run [Hack Club](https://hackclub.com) at my school and lead the
 V5RC robotics team at Mepham, which in practice means I write the code and then explain to

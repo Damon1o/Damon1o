@@ -36,8 +36,8 @@ A warm, personal portfolio site built with Flask, featuring an interactive canva
 
 ```bash
 # Clone the repository
-git clone https://github.com/Damon1o/portfolio.git
-cd portfolio
+git clone https://github.com/Damon1o/Damon1o.git
+cd Damon1o
 
 # Create a virtual environment
 python -m venv venv
@@ -95,9 +95,13 @@ portfolio/
 │   └── contact.html            # Contact form
 ├── static/
 │   ├── css/
-│   │   └── style.css           # All styles (~2500 lines, warm terracotta theme)
+│   │   ├── core.css            # Tokens, layout, nav, footer, shared components
+│   │   ├── pages/              # Per-page styles (index, projects, about, legal, …)
+│   │   └── admin/              # Admin dashboard styles
 │   ├── js/
-│   │   └── main.js             # Particle canvas, theme toggle, scroll reveals, animations
+│   │   ├── core.js             # Particle canvas, theme toggle, scroll reveals, animations
+│   │   ├── pages/              # Per-page scripts (hero background, filtering, …)
+│   │   └── admin/              # Admin dashboard scripts
 │   ├── data/
 │   │   ├── siteConfig.json     # Hero text, contact links, email config, admin password
 │   │   ├── featuredProjects.json  # Project portfolio data
